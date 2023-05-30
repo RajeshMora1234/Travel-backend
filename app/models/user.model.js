@@ -1,6 +1,4 @@
-const { saltSize, keySize } = require("../authentication/crypto");
-
-module.exports = (sequelize, Sequelize) => {
+export const User = (sequelize, Sequelize) => {
   const User = sequelize.define("user", {
     firstName: {
       type: Sequelize.STRING,

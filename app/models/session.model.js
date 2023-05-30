@@ -1,4 +1,4 @@
-module.exports = (sequelize, Sequelize) => {
+export const Session = (sequelize, Sequelize) => {
   const Session = sequelize.define("session", {
     email: {
       type: Sequelize.STRING,
