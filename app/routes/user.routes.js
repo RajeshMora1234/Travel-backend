@@ -1,25 +1,13 @@
-module.exports = (app) => {
-  const User = require("../controllers/user.controller.js");
-  const { authenticateRoute } = require("../authentication/authentication");
-  var router = require("express").Router();
+import { Router} from 'express';
+import bodyParser from 'body-parser';
 
-  // Create a new User
-  router.post("/users/", User.create);
+import { findAll, findOne, create, deleteUser,deleteAll,update } from "../controller/user.controller.js";
 
-  // Retrieve all Users
-  router.get("/users/", User.findAll);
+export const userRouter = Router();
 
-  // Retrieve a single User with id
-  router.get("/users/:id", User.findOne);
-
-  // Update a User with id
-  router.put("/users/:id", [authenticateRoute], User.update);
-
-  // Delete a User with id
-  router.delete("/users/:id", [authenticateRoute], User.delete);
-
-  // Delete all User
-  router.delete("/users/", [authenticateRoute], User.deleteAll);
-
-  app.use("/travelapi", router);
-};
+userRouter.get('/users', findAll);
+userRouter.get('/users/:id',  findOne);
+userRouter.post('/users',[bodyParser.urlencoded({ extended: false }),bodyParser.json()],create)
+userRouter.delete("/users/:id", deleteUser);
+userRouter.delete("/users/", deleteAll);
+userRouter.put("/users/id", update);
